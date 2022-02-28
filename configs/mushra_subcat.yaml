@@ -1,0 +1,80 @@
+testname: MUSHRA with subcategories
+testId: mushra_subcats
+bufferSize: 2048
+stopOnErrors: true
+showButtonPreviousPage: true
+language: en
+remoteService: service/write.php
+
+pages:
+ - type: consent
+   id: all
+   name: Consent
+   mustConsent: true
+   content: <p>Would you like to give consent for us to store your answers?</p>
+ - type: generic
+   id: all
+   name: All listening tests
+   content: <p>This is an example listening test using MUSHRA with subcategories.</p>
+ - type: volume
+   id: vol
+   name: Volume settings
+   content: Please adjust the volume!
+   stimulus: configs/resources/audio/mono_ref.wav
+   defaultVolume: 0.5
+ -
+  - type: mushra_subcat
+    id: mushra_subcat_neutral_other
+    name: MUSHRA
+    content: This is a MUSHRA page with subcategories with neutral and other.
+    showWaveform: false
+    enableLooping: false 
+    reference: configs/resources/audio/mono_ref.wav
+    createAnchor35: true
+    createAnchor70: true
+    stimuli:
+      C1: configs/resources/audio/mono_c1.wav 
+      C2: configs/resources/audio/mono_c2.wav
+      C3: configs/resources/audio/mono_c3.wav
+    subcats:
+      angry: Angry
+      happy: Happy
+      sad: Sad
+    scale: [Extreme, Strong, Moderate, Light, Weak]
+    has_neutral: true
+    has_other: true
+  - type: mushra_subcat
+    id: mushra_nowav_noloop
+    name: MUSHRA
+    content: This is a MUSHRA page with subcategories without neutral and other.
+    showWaveform: false
+    enableLooping: false 
+    reference: configs/resources/audio/mono_ref.wav
+    createAnchor35: true
+    createAnchor70: true
+    stimuli:
+      C1: configs/resources/audio/mono_c1.wav 
+      C2: configs/resources/audio/mono_c2.wav
+      C3: configs/resources/audio/mono_c3.wav
+    subcats:
+      angry: Angry
+      happy: Happy
+      sad: Sad
+    scale: [Extreme, Strong, Moderate, Light, Weak]
+    has_neutral: false
+    has_other: false     
+ - type: finish
+   name: Thank you
+   content: Thank you for attending!
+   popupContent: Your results were sent. Goodbye and have a nice day!
+   showResults: false
+   showErrors: false
+   writeResults: true
+   questionnaire:
+       - type: text
+         label: Special nickname
+         name: unique_nickname
+       - type: long_text
+         label: Any feedback is welcome!
+         name: feedback
+         optional: true
